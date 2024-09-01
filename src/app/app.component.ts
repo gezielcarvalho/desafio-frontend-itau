@@ -9,7 +9,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
   standalone: true,
   imports: [RouterOutlet, MatToolbarModule, ToolbarComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'desafio-frontend-itau';
