@@ -44,7 +44,9 @@
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Ação</th>
         <td mat-cell *matCellDef="let element">
-          <mat-icon>visibility</mat-icon>
+          <mat-icon (click)="onActionClick(element)" class="inverted-icon"
+            >visibility</mat-icon
+          >
         </td>
       </ng-container>
 

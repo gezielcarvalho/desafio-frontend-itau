@@ -3,6 +3,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DecimalPipe, NgClass } from '@angular/common';
 import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { IBusiness } from '../business.model';
@@ -40,14 +41,13 @@ export class BusinessListComponent implements AfterViewInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private service: BusinessService) {}
+  constructor(private service: BusinessService, private router: Router) {}
 
   /* Data */
   getAll() {
     this.service.getBusinesses().subscribe((data: IBusiness[]) => {
       this.data.set(data);
       this.dataSource = new MatTableDataSource(data);
-      // console.log('Data:', data);
     });
   }
 
@@ -60,6 +60,7 @@ export class BusinessListComponent implements AfterViewInit {
 
   onActionClick(element: any) {
     console.log('Action clicked for:', element);
+    this.router.navigate(['/business-detail', element.id]);
   }
 }
 
