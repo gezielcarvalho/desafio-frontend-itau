@@ -4,17 +4,23 @@ table {
   color: blue;
   .mat-mdc-header-row {
     background-color: white;
-    color: black;
+    color: gray;
   }
   .mat-mdc-cell {
-    color: black;
+    color: #444444;
     border-bottom-color: #f5f5f5;
     border-width: 2px;
+  }
+  .name-column {
+    font-weight: bold;
+  }
+  .mat-header-cell {
+    text-align: center;
   }
 }
 .mat-mdc-paginator {
   background-color: white;
-  color: black !important;
+  color: gray !important;
 }
 .mat-mdc-select {
   background-color: white;
@@ -29,5 +35,20 @@ table {
   .mat-mdc-select-value
   .mat-mdc-select-value-text
   .mat-mdc-select-min-line {
-  color: black !important;
+  color: #444444 !important;
+}
+.active-circle {
+  height: 10px;
+  width: 10px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.inactive-circle {
+  height: 10px;
+  width: 10px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
 }
