@@ -11,7 +11,7 @@
   6. Mask inputs
   7. Angular Material components
   8. Making all fields mandatory using Rx Forms
-- Pleno
+- Mid-Senior
   1. Interceptors
   2. Extensive use of language
   3. Project architecture for scalability
@@ -22,3 +22,9 @@
   8. Commented code (too much commenting is a sign of bad code)
   9. Make <app-cep> + EventEmitter component to feed other fields
   10. Pipes to resolve formatting.
+
+## References
+
+1. https://material.angular.io/
+2. https://logovectorseek.com/itau-bba-logo-vector-svg/
+3.
