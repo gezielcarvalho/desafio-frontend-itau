@@ -1,4 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  .component-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 16px;
+    padding-left: 160px;
+    padding-right: 160px;
+  }
+  .component-title {
+    font-size: 32px;
+    font-weight: bold;
+    padding-top: 32px;
+  }
+  .component-subtitle {
+    font-size: 24px;
+    font-weight: lighter;
+    padding-top: 0;
+    line-height: 8px;
+  }
+}

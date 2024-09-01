@@ -1,43 +1,45 @@
-<mat-toolbar color="primary">
-  <img
-    src="/assets/images/itau_bba_logo.png"
-    alt="Itaú BBA Logo"
-    class="logo"
-  />
-  <div class="right-menu">
-    @if (currentLanguage === 'PT') {
-    <button
-      mat-button
-      (click)="toggleLanguage('EN')"
-      [class.active]="currentLanguage === 'PT'"
-    >
-      PT
-    </button>
-    } @else {
-    <button
-      mat-button
-      (click)="toggleLanguage('PT')"
-      [class.active]="currentLanguage === 'EN'"
-    >
-      EN
-    </button>
-    }
-    <div class="vertical-divider"></div>
-    <div class="avatar-container">
-      <mat-icon class="avatar">account_circle</mat-icon>
+<div class="toolbar-container">
+  <mat-toolbar color="primary">
+    <img
+      src="/assets/images/itau_bba_logo.png"
+      alt="Itaú BBA Logo"
+      class="logo"
+    />
+    <div class="right-menu">
+      @if (currentLanguage === 'PT') {
+      <button
+        mat-button
+        (click)="toggleLanguage('EN')"
+        [class.active]="currentLanguage === 'PT'"
+      >
+        PT
+      </button>
+      } @else {
+      <button
+        mat-button
+        (click)="toggleLanguage('PT')"
+        [class.active]="currentLanguage === 'EN'"
+      >
+        EN
+      </button>
+      }
+      <div class="vertical-divider"></div>
+      <div class="avatar-container">
+        <mat-icon class="avatar">account_circle</mat-icon>
+      </div>
+      <div class="name-container">
+        <div class="user-name">John Doe</div>
+        <div class="user-role">Diretor Itaú BBA</div>
+      </div>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Profile</button>
+        <button mat-menu-item>Settings</button>
+        <mat-divider />
+        <button mat-menu-item>Logout</button>
+      </mat-menu>
     </div>
-    <div class="name-container">
-      <div class="user-name">John Doe</div>
-      <div class="user-role">Diretor Itaú BBA</div>
-    </div>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>arrow_drop_down</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Profile</button>
-      <button mat-menu-item>Settings</button>
-      <mat-divider />
-      <button mat-menu-item>Logout</button>
-    </mat-menu>
-  </div>
-</mat-toolbar>
+  </mat-toolbar>
+</div>
