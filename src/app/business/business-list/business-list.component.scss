@@ -1,7 +1,7 @@
 table {
   width: 100%;
   background-color: white;
-  color: blue;
+
   .mat-mdc-header-row {
     background-color: white;
     color: gray;
@@ -51,4 +51,16 @@ table {
   background-color: red;
   border-radius: 50%;
   display: inline-block;
+}
+
+::ng-deep .mat-sort-header-arrow {
+  color: black; /* Change this to your desired color */
+}
+
+::ng-deep .mat-sort-header-arrow .mat-sort-header-stem {
+  background-color: black; /* Change this to your desired color */
+}
+
+::ng-deep .mat-sort-header-arrow .mat-sort-header-indicator {
+  color: black; /* Change this to your desired color */
 }

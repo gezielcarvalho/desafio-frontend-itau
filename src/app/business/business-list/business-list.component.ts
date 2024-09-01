@@ -2,7 +2,8 @@ import { AfterViewInit, Component, signal, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DecimalPipe, NgClass } from '@angular/common';
-
+import { MatSort } from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { IBusiness } from '../business.model';
 import { BusinessService } from '../business.service';
@@ -13,6 +14,7 @@ import { BusinessService } from '../business.service';
   imports: [
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     MatIconModule,
     DecimalPipe,
     NgClass,
@@ -22,6 +24,8 @@ import { BusinessService } from '../business.service';
   styleUrl: './business-list.component.scss',
 })
 export class BusinessListComponent implements AfterViewInit {
+  @ViewChild(MatSort)
+  sort!: MatSort;
   displayedColumns: string[] = [
     'name',
     'business',
@@ -51,6 +55,7 @@ export class BusinessListComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.getAll();
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   onActionClick(element: any) {
