@@ -1,0 +1,33 @@
+form {
+  margin-top: 48px;
+}
+.field-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: 32px;
+  .back-button {
+    background-color: darkgray;
+    color: white;
+    border-radius: 8px;
+  }
+  .back-button:hover {
+    background-color: gray;
+  }
+  .save-button {
+    background-color: #ff7b24;
+    color: white;
+    border-radius: 8px;
+  }
+  .save-button:hover {
+    background-color: #d85700;
+  }
+}

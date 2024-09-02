@@ -6,7 +6,9 @@ import { ChangeDetectionStrategy } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-
+import { Router } from '@angular/router';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -14,6 +16,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-business-detail',
@@ -21,20 +24,24 @@ import { MatSelectModule } from '@angular/material/select';
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatButtonModule,
     MatInputModule,
     MatSelectModule,
     MatIconModule,
+    NgxMaskDirective,
   ],
-  providers: [BusinessService],
+  providers: [BusinessService, provideNgxMask()],
   templateUrl: './business-detail.component.html',
   styleUrl: './business-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class BusinessDetailComponent {
   constructor(
     private route: ActivatedRoute,
     private service: BusinessService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
   ) {
     this.businessForm = this.fb.group({
       id: [null],
@@ -46,16 +53,23 @@ export class BusinessDetailComponent {
       ],
       active: [false],
       cep: ['', Validators.required],
-      cnpj: [null, [Validators.required, Validators.pattern(/^\d+$/)]],
+      cnpj: [
+        null,
+        [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{12}\d{2}$/)],
+      ],
     });
   }
 
   businessForm: FormGroup;
   record = signal<IBusiness | null>(null);
-
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
     if (this.businessForm.valid) {
-      // Handle form submission
+      this.service
+        .updateBusiness(this.businessForm.value.id, this.businessForm.value)
+        .subscribe(() => {
+          this.navigateToRoot();
+        });
     }
   }
 
@@ -77,6 +91,17 @@ export class BusinessDetailComponent {
       this.record.set(data);
       this.businessForm.patchValue(data);
     });
-    // Implement your logic to fetch the row data using the rowId
+  }
+
+  navigateToRoot() {
+    this.router.navigate(['/']);
+  }
+
+  customMask(rawValue: string): string {
+    let maskedValue = rawValue.replace(/\D/g, ''); // Remove all non-digit characters
+    if (maskedValue.length > 12) {
+      maskedValue = maskedValue.slice(0, 12) + '-' + maskedValue.slice(12);
+    }
+    return maskedValue;
   }
 }

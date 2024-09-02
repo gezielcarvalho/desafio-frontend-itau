@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class BusinessService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl + '/businesses';
 
   constructor(private http: HttpClient) {}
 
@@ -18,5 +18,17 @@ export class BusinessService {
 
   getBusiness(id: number): Observable<IBusiness> {
     return this.http.get<IBusiness>(`${this.apiUrl}/${id}`);
+  }
+
+  createBusiness(business: IBusiness): Observable<IBusiness> {
+    return this.http.post<IBusiness>(this.apiUrl, business);
+  }
+
+  updateBusiness(id: number, business: IBusiness): Observable<IBusiness> {
+    return this.http.put<IBusiness>(`${this.apiUrl}/${id}`, business);
+  }
+
+  deleteBusiness(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

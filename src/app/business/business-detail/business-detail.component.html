@@ -3,119 +3,124 @@
   <p class="component-subtitle">
     exibindo detalhes do polo {{ record()?.name }}#{{ record()?.id }}
   </p>
-  <form [formGroup]="businessForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="businessForm" (ngSubmit)="onSubmit($event)">
     <div class="p-4 custom-card">
       <div class="form-group d-flex justify-content-between">
         <input type="hidden" id="id" formControlName="id" />
-        <div class="mr-3">
-          <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
-            <input
-              matInput
-              type="text"
-              class="form-control"
-              id="name"
-              formControlName="name"
-              required />
-            @if((businessForm.get('name')?.dirty ||
-            businessForm.get('name')?.touched) &&
-            businessForm.get('name')?.invalid){
-            <mat-error>Name is required.</mat-error>
+        <p>Detalhes do Endereço</p>
+        <div class="field-row">
+          <div class="mr-3">
+            <mat-form-field appearance="outline">
+              <mat-label>CEP</mat-label>
+              <input
+                matInput
+                type="text"
+                id="cep"
+                formControlName="cep"
+                required />
+              @if((businessForm.get('cep')?.dirty ||
+              businessForm.get('cep')?.touched) &&
+              businessForm.get('cep')?.invalid){
+              <mat-error> CEP is required. </mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+        <p>Detalhes da Empresa</p>
+        <div class="field-row">
+          <div class="mr-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+                required />
+              @if((businessForm.get('name')?.dirty ||
+              businessForm.get('name')?.touched) &&
+              businessForm.get('name')?.invalid){
+              <mat-error>Name is required.</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="mr-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Business</mat-label>
+              <input
+                matInput
+                type="text"
+                class="form-control"
+                id="business"
+                formControlName="business"
+                required />
+              @if((businessForm.get('business')?.dirty ||
+              businessForm.get('business')?.touched) &&
+              businessForm.get('business')?.invalid){
+              <mat-error>Business is required.</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="mr-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Valuation</mat-label>
+              <input
+                matInput
+                type="number"
+                class="form-control"
+                id="valuation"
+                formControlName="valuation"
+                required />
+              @if((businessForm.get('valuation')?.dirty ||
+              businessForm.get('valuation')?.touched) &&
+              businessForm.get('valuation')?.invalid){
+              <mat-error>
+                Valuation is required and must be a valid number.
+              </mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="mr-3">
+            <mat-form-field appearance="outline">
+              <mat-label>CNPJ</mat-label>
+              <input
+                matInput
+                type="text"
+                id="cnpj"
+                formControlName="cnpj"
+                mask="AA.AAA.AAA/AAAA-00"
+                required />
+            </mat-form-field>
+            @if((businessForm.get('cnpj')?.dirty ||
+            businessForm.get('cnpj')?.touched) &&
+            businessForm.get('cnpj')?.invalid){
+            <mat-error class="text-danger"> CNPJ is not valid. </mat-error>
             }
-          </mat-form-field>
-        </div>
-        <div class="mr-3">
-          <mat-form-field appearance="outline">
-            <mat-label>Business</mat-label>
-            <input
-              matInput
-              type="text"
-              class="form-control"
-              id="business"
-              formControlName="business"
-              required />
-            @if((businessForm.get('business')?.dirty ||
-            businessForm.get('business')?.touched) &&
-            businessForm.get('business')?.invalid){
-            <mat-error>Business is required.</mat-error>
-            }
-          </mat-form-field>
-        </div>
-        <div class="mr-3">
-          <mat-form-field appearance="outline">
-            <mat-label>Valuation</mat-label>
-            <input
-              matInput
-              type="number"
-              class="form-control"
-              id="valuation"
-              formControlName="valuation"
-              required />
-            @if((businessForm.get('valuation')?.dirty ||
-            businessForm.get('valuation')?.touched) &&
-            businessForm.get('valuation')?.invalid){
-            <mat-error>
-              Valuation is required and must be a valid number.
-            </mat-error>
-            }
-          </mat-form-field>
-        </div>
-        <div class="mr-3">
-          <mat-form-field appearance="outline">
-            <mat-label>Active</mat-label>
-            <mat-select id="active" formControlName="active">
-              <mat-option [value]="true">Yes</mat-option>
-              <mat-option [value]="false">No</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="mr-3">
-          <mat-form-field appearance="outline">
-            <mat-label>CEP</mat-label>
-            <input
-              matInput
-              type="text"
-              id="cep"
-              formControlName="cep"
-              required />
-            @if((businessForm.get('cep')?.dirty ||
-            businessForm.get('cep')?.touched) &&
-            businessForm.get('cep')?.invalid){
-            <mat-error> CEP is required. </mat-error>
-            }
-          </mat-form-field>
-        </div>
-        <div class="mr-3">
-          <mat-form-field appearance="outline">
-            <mat-label>CNPJ</mat-label>
-            <input
-              matInput
-              type="number"
-              id="cnpj"
-              formControlName="cnpj"
-              required />
-          </mat-form-field>
-          @if((businessForm.get('cnpj')?.dirty ||
-          businessForm.get('cnpj')?.touched) &&
-          businessForm.get('cnpj')?.invalid){
-          <mat-error class="text-danger">
-            CNPJ is required and must be a valid number.
-          </mat-error>
-          }
+          </div>
+          <div class="mr-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Active</mat-label>
+              <mat-select id="active" formControlName="active">
+                <mat-option [value]="true">Yes</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
       </div>
-      <button
-        type="button"
-        class="btn btn-secondary mt-4 mr-3"
-        (click)="resetForm()">
-        Reset
-      </button>
-      <button
-        type="submit"
-        class="btn btn-primary mt-4"
-        [disabled]="businessForm.invalid">
-        Submit
-      </button>
+      <div class="button-container">
+        <button class="back-button" (click)="navigateToRoot()" mat-flat-button>
+          Voltar
+        </button>
+        <button
+          class="save-button"
+          type="submit"
+          [disabled]="businessForm.invalid"
+          mat-flat-button>
+          Salvar
+        </button>
+      </div>
     </div>
   </form>
 </div>

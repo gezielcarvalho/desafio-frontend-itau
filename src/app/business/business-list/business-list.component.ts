@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, signal, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DecimalPipe, NgClass } from '@angular/common';
@@ -24,7 +30,7 @@ import { BusinessService } from '../business.service';
   templateUrl: './business-list.component.html',
   styleUrl: './business-list.component.scss',
 })
-export class BusinessListComponent implements AfterViewInit {
+export class BusinessListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
   displayedColumns: string[] = [
@@ -42,25 +48,37 @@ export class BusinessListComponent implements AfterViewInit {
   paginator!: MatPaginator;
 
   constructor(private service: BusinessService, private router: Router) {}
+  ngOnInit(): void {
+    this.getAll();
+  }
 
   /* Data */
   getAll() {
     this.service.getBusinesses().subscribe((data: IBusiness[]) => {
       this.data.set(data);
       this.dataSource = new MatTableDataSource(data);
+      this.setPaginator();
     });
   }
 
   /* Lifecycle Hooks */
   ngAfterViewInit() {
-    this.getAll();
-    this.dataSource.paginator = this.paginator;
+    this.setPaginator();
     this.dataSource.sort = this.sort;
   }
 
-  onActionClick(element: any) {
-    console.log('Action clicked for:', element);
+  setPaginator() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  onReadClick(element: any) {
     this.router.navigate(['/business-detail', element.id]);
+  }
+
+  onRemoveClick(element: any) {
+    this.service.deleteBusiness(element.id).subscribe(() => {
+      this.getAll();
+    });
   }
 }
 
