@@ -1,3 +1,4 @@
+// Angular core modules
 import {
   AfterViewInit,
   Component,
@@ -5,31 +6,36 @@ import {
   signal,
   ViewChild,
 } from '@angular/core';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { DecimalPipe, NgClass } from '@angular/common';
-import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
-import { MatSortModule } from '@angular/material/sort';
-import { MatIconModule } from '@angular/material/icon';
-import { IBusiness } from '../business.model';
-import { BusinessService } from '../business.service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { catchError } from 'rxjs/operators';
-import { of, throwError } from 'rxjs';
+
+// Angular Material modules
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+
+// RxJS modules
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
+
+// Application-specific components and services
+import { BusinessService } from '../business.service';
 import { ConfirmDialogComponent } from '../../common/confirm-dialog.component';
+import { IBusiness } from '../business.model';
 
 @Component({
   selector: 'app-business-list',
   standalone: true,
   imports: [
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatIconModule,
     DecimalPipe,
+    MatIconModule,
+    MatPaginatorModule,
     MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
     NgClass,
   ],
   providers: [BusinessService],
@@ -49,7 +55,6 @@ export class BusinessListComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<IBusiness>([] as IBusiness[]);
 
   data = signal<IBusiness[]>([] as IBusiness[]);
-
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
@@ -59,9 +64,6 @@ export class BusinessListComponent implements AfterViewInit, OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) {}
-  ngOnInit(): void {
-    this.getAll();
-  }
 
   /* Data */
   getAll() {
@@ -86,23 +88,28 @@ export class BusinessListComponent implements AfterViewInit, OnInit {
       });
   }
 
+  addBusiness() {
+    console.log('Add business');
+    this.router.navigate(['/business-detail/']);
+  }
   /* Lifecycle Hooks */
+  ngOnInit(): void {
+    this.getAll();
+  }
+
   ngAfterViewInit() {
     this.setPaginator();
     this.dataSource.sort = this.sort;
   }
 
+  /* Helpers */
   setPaginator() {
     this.dataSource.paginator = this.paginator;
   }
 
+  /* Event Handlers */
   onReadClick(element: any) {
     this.router.navigate(['/business-detail', element.id]);
-  }
-
-  addBusiness() {
-    console.log('Add business');
-    this.router.navigate(['/business-detail/']);
   }
 
   onRemoveClick(element: IBusiness) {

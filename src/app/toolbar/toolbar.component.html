@@ -3,23 +3,20 @@
     <img
       src="/assets/images/itau_bba_logo.png"
       alt="Itaú BBA Logo"
-      class="logo"
-    />
+      class="logo" />
     <div class="right-menu">
       @if (currentLanguage === 'PT') {
       <button
         mat-button
         (click)="toggleLanguage('EN')"
-        [class.active]="currentLanguage === 'PT'"
-      >
+        [class.active]="currentLanguage === 'PT'">
         PT
       </button>
       } @else {
       <button
         mat-button
         (click)="toggleLanguage('PT')"
-        [class.active]="currentLanguage === 'EN'"
-      >
+        [class.active]="currentLanguage === 'EN'">
         EN
       </button>
       }

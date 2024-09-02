@@ -1,7 +1,10 @@
+// Angular core modules
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+// Angular Material modules
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog'; // Import MatDialogModule
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -16,7 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog'; // Import MatDialogM
       <button mat-button [mat-dialog-close]="true">Delete</button>
     </div>
   `,
-  imports: [MatButtonModule, MatDialogModule], // Add MatDialogModule to the imports array
+  imports: [MatButtonModule, MatDialogModule],
 })
 export class ConfirmDialogComponent {
   constructor(

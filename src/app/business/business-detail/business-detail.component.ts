@@ -1,40 +1,44 @@
+// Angular core modules
 import { Component, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IBusiness } from '../business.model';
-import { BusinessService } from '../business.service';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { Router } from '@angular/router';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
+
+// Angular Material modules
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
+// Mask modules
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+
+// Application-specific components and services
+import { BusinessService } from '../business.service';
 import { CepComponent } from '../../common/cep/cep.component';
+import { IBusiness } from '../business.model';
 
 @Component({
   selector: 'app-business-detail',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    MatFormFieldModule,
+    CepComponent,
     MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatSelectModule,
-    MatIconModule,
     NgxMaskDirective,
-    CepComponent,
+    ReactiveFormsModule,
   ],
   providers: [BusinessService, provideNgxMask()],
   templateUrl: './business-detail.component.html',
   styleUrl: './business-detail.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BusinessDetailComponent {
   constructor(
@@ -66,6 +70,8 @@ export class BusinessDetailComponent {
 
   businessForm: FormGroup;
   record = signal<IBusiness | null>(null);
+
+  /* Event Handlers */
   onSubmit(event: Event) {
     event.preventDefault();
     if (this.businessForm.valid) {
@@ -84,10 +90,7 @@ export class BusinessDetailComponent {
     }
   }
 
-  resetForm() {
-    this.businessForm.reset();
-  }
-
+  /* Lifecycle Hooks */
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       const rowId = params.get('id');
@@ -98,14 +101,15 @@ export class BusinessDetailComponent {
     });
   }
 
+  /* Data */
   fetchRowData(rowId: string | null) {
-    console.log('Row ID:', rowId);
     this.service.getBusiness(rowId!).subscribe((data: IBusiness) => {
       this.record.set(data);
       this.businessForm.patchValue(data);
     });
   }
 
+  /* Helpers */
   navigateToRoot() {
     this.router.navigate(['/']);
   }

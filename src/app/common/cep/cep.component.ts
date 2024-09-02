@@ -1,9 +1,16 @@
+// Angular core modules
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+// Angular Material modules
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MockCepService } from '../../business/business-detail/mock-cep-service';
+
+// Mask modules
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+
+// Application-specific components and services
+import { MockCepService } from '../../business/business-detail/mock-cep-service';
 
 @Component({
   selector: 'app-cep',
@@ -11,8 +18,8 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
   imports: [
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
     NgxMaskDirective,
+    ReactiveFormsModule,
   ],
   providers: [provideNgxMask()],
   template: `
@@ -41,6 +48,7 @@ export class CepComponent implements OnInit {
 
   constructor(private mockCepService: MockCepService) {}
 
+  /* Lifecycle Hooks */
   ngOnInit() {
     this.formGroup.get(this.controlName)?.valueChanges.subscribe((cep) => {
       this.mockCepService.getAddressByCep(cep).subscribe((address) => {
