@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IBusiness } from './business.model';
 import { environment } from '../../environments/environment';
+import { catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,22 +14,36 @@ export class BusinessService {
   constructor(private http: HttpClient) {}
 
   getBusinesses(): Observable<IBusiness[]> {
-    return this.http.get<IBusiness[]>(this.apiUrl);
+    return this.http
+      .get<IBusiness[]>(this.apiUrl)
+      .pipe(catchError(this.handleError));
   }
 
   getBusiness(id: number): Observable<IBusiness> {
-    return this.http.get<IBusiness>(`${this.apiUrl}/${id}`);
+    return this.http
+      .get<IBusiness>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
   }
 
   createBusiness(business: IBusiness): Observable<IBusiness> {
-    return this.http.post<IBusiness>(this.apiUrl, business);
+    return this.http
+      .post<IBusiness>(this.apiUrl, business)
+      .pipe(catchError(this.handleError));
   }
 
   updateBusiness(id: number, business: IBusiness): Observable<IBusiness> {
-    return this.http.put<IBusiness>(`${this.apiUrl}/${id}`, business);
+    return this.http
+      .put<IBusiness>(`${this.apiUrl}/${id}`, business)
+      .pipe(catchError(this.handleError));
   }
 
   deleteBusiness(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http
+      .delete<void>(`${this.apiUrl}/${id}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: any): Observable<never> {
+    return throwError(() => new Error(error.message || 'Unknown error'));
   }
 }
