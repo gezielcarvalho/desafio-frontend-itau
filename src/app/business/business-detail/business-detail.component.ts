@@ -16,6 +16,7 @@ import {
 } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { CepComponent } from '../../common/cep/cep.component';
 
 @Component({
   selector: 'app-business-detail',
@@ -28,6 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatIconModule,
     NgxMaskDirective,
+    CepComponent,
   ],
   providers: [BusinessService, provideNgxMask()],
   templateUrl: './business-detail.component.html',
@@ -51,6 +53,10 @@ export class BusinessDetailComponent {
       ],
       active: [false],
       cep: ['', Validators.required],
+      nomeDaRua: [''],
+      bairro: [''],
+      estado: [''],
+      cidade: [''],
       cnpj: [
         null,
         [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{12}\d{2}$/)],

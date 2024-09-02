@@ -10,43 +10,34 @@
         <p>Detalhes do Endereço</p>
         <div class="field-row">
           <div class="mr-3">
-            <mat-form-field appearance="outline">
-              <mat-label>CEP</mat-label>
-              <input
-                matInput
-                type="text"
-                id="cep"
-                formControlName="cep"
-                required />
-              @if((businessForm.get('cep')?.dirty ||
-              businessForm.get('cep')?.touched) &&
-              businessForm.get('cep')?.invalid){
-              <mat-error> CEP is required. </mat-error>
-              }
-            </mat-form-field>
+            <app-cep [formGroup]="businessForm" controlName="cep"></app-cep>
           </div>
-          <div class="mr-3 street-name">
+          <div class="mr-3">
             <mat-form-field appearance="outline">
               <mat-label>Nome da Rua</mat-label>
-              <input readonly matInput type="text" />
+              <input
+                readonly
+                matInput
+                type="text"
+                formControlName="nomeDaRua" />
             </mat-form-field>
           </div>
           <div class="mr-3">
             <mat-form-field appearance="outline">
               <mat-label>Bairro</mat-label>
-              <input readonly matInput type="text" />
+              <input readonly matInput type="text" formControlName="bairro" />
             </mat-form-field>
           </div>
           <div class="mr-3">
             <mat-form-field appearance="outline">
               <mat-label>Estado</mat-label>
-              <input readonly matInput type="text" />
+              <input readonly matInput type="text" formControlName="estado" />
             </mat-form-field>
           </div>
           <div class="mr-3">
             <mat-form-field appearance="outline">
               <mat-label>Cidade</mat-label>
-              <input readonly matInput type="text" />
+              <input readonly matInput type="text" formControlName="cidade" />
             </mat-form-field>
           </div>
         </div>

@@ -8,9 +8,6 @@ form {
   gap: 8px;
   margin-bottom: 10px;
 }
-.street-name {
-  flex: 2; /* Adjust this value to make the field larger or smaller */
-}
 .button-container {
   display: flex;
   flex-direction: row;
@@ -35,26 +32,24 @@ form {
   }
 }
 
-/* Add these styles for darker font and outline colors */
 ::ng-deep .mat-mdc-floating-label {
-  color: #333 !important; /* Darker font color */
+  color: #aaa !important;
 }
 
 ::ng-deep .mdc-notched-outline {
-  border-color: #333 !important; /* Darker outline color */
+  border-color: #333 !important;
 }
 
 ::ng-deep .mdc-notched-outline__leading,
 ::ng-deep .mdc-notched-outline__notch,
 ::ng-deep .mdc-notched-outline__trailing {
-  border-color: #333 !important; /* Darker outline color */
+  border-color: #333 !important;
 }
 
-/* Add these styles for the input field */
 ::ng-deep .mat-mdc-input-element {
-  color: #333 !important; /* Darker input text color */
+  color: #333 !important;
 }
 
 ::ng-deep .mat-mdc-select-min-line {
-  color: #333 !important; /* Darker input text color */
+  color: #333 !important;
 }
