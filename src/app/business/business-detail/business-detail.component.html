@@ -45,7 +45,7 @@
         <div class="field-row">
           <div class="mr-3">
             <mat-form-field appearance="outline">
-              <mat-label>Name</mat-label>
+              <mat-label>Nome</mat-label>
               <input
                 matInput
                 type="text"
@@ -56,7 +56,7 @@
               @if((businessForm.get('name')?.dirty ||
               businessForm.get('name')?.touched) &&
               businessForm.get('name')?.invalid){
-              <mat-error>Name is required.</mat-error>
+              <mat-error>Nome é obrigatório.</mat-error>
               }
             </mat-form-field>
           </div>
@@ -73,7 +73,7 @@
               @if((businessForm.get('business')?.dirty ||
               businessForm.get('business')?.touched) &&
               businessForm.get('business')?.invalid){
-              <mat-error>Business is required.</mat-error>
+              <mat-error>Business é obrigatório.</mat-error>
               }
             </mat-form-field>
           </div>
@@ -94,9 +94,7 @@
               @if((businessForm.get('valuation')?.dirty ||
               businessForm.get('valuation')?.touched) &&
               businessForm.get('valuation')?.invalid){
-              <mat-error>
-                Valuation is required and must be a valid number.
-              </mat-error>
+              <mat-error> Valuation é obrigatório e do tipo número. </mat-error>
               }
             </mat-form-field>
           </div>
@@ -114,15 +112,15 @@
             @if((businessForm.get('cnpj')?.dirty ||
             businessForm.get('cnpj')?.touched) &&
             businessForm.get('cnpj')?.invalid){
-            <mat-error class="text-danger"> CNPJ is not valid. </mat-error>
+            <mat-error class="text-danger"> CNPJ inválido. </mat-error>
             }
           </div>
           <div class="mr-3">
             <mat-form-field appearance="outline">
               <mat-label>Active</mat-label>
               <mat-select id="active" formControlName="active">
-                <mat-option [value]="true">Yes</mat-option>
-                <mat-option [value]="false">No</mat-option>
+                <mat-option [value]="true">Sim</mat-option>
+                <mat-option [value]="false">Não</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
