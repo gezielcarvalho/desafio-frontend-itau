@@ -67,11 +67,15 @@
               <mat-label>Valuation</mat-label>
               <input
                 matInput
-                type="number"
+                type="text"
                 class="form-control"
                 id="valuation"
                 formControlName="valuation"
-                required />
+                required
+                mask="separator.2"
+                thousandSeparator="."
+                decimalMarker=","
+                prefix="R$ " />
               @if((businessForm.get('valuation')?.dirty ||
               businessForm.get('valuation')?.touched) &&
               businessForm.get('valuation')?.invalid){

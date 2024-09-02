@@ -23,6 +23,9 @@ table {
     align-items: center;
     height: inherit;
     gap: 8px;
+    mat-icon {
+      cursor: pointer;
+    }
   }
 }
 .mat-mdc-paginator {
