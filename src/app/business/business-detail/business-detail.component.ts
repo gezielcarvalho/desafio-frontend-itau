@@ -8,7 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -34,7 +33,6 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './business-detail.component.html',
   styleUrl: './business-detail.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class BusinessDetailComponent {
   constructor(
@@ -65,11 +63,18 @@ export class BusinessDetailComponent {
   onSubmit(event: Event) {
     event.preventDefault();
     if (this.businessForm.valid) {
-      this.service
-        .updateBusiness(this.businessForm.value.id, this.businessForm.value)
-        .subscribe(() => {
-          this.navigateToRoot();
-        });
+      // if id is null, then it's a new record
+      if (!this.businessForm.value.id) {
+        // create a new record without the id
+        const { id, ...newRecord } = this.businessForm.value;
+        this.service
+          .createBusiness(newRecord)
+          .subscribe(() => this.navigateToRoot());
+      } else {
+        this.service
+          .updateBusiness(this.businessForm.value.id, this.businessForm.value)
+          .subscribe(() => this.navigateToRoot());
+      }
     }
   }
 
@@ -81,13 +86,15 @@ export class BusinessDetailComponent {
     this.route.paramMap.subscribe((params) => {
       const rowId = params.get('id');
       // Fetch the row data using the rowId
-      this.fetchRowData(rowId);
+      if (rowId) {
+        this.fetchRowData(rowId);
+      }
     });
   }
 
   fetchRowData(rowId: string | null) {
     console.log('Row ID:', rowId);
-    this.service.getBusiness(Number(rowId)).subscribe((data: IBusiness) => {
+    this.service.getBusiness(rowId!).subscribe((data: IBusiness) => {
       this.record.set(data);
       this.businessForm.patchValue(data);
     });
@@ -95,13 +102,5 @@ export class BusinessDetailComponent {
 
   navigateToRoot() {
     this.router.navigate(['/']);
-  }
-
-  customMask(rawValue: string): string {
-    let maskedValue = rawValue.replace(/\D/g, ''); // Remove all non-digit characters
-    if (maskedValue.length > 12) {
-      maskedValue = maskedValue.slice(0, 12) + '-' + maskedValue.slice(12);
-    }
-    return maskedValue;
   }
 }

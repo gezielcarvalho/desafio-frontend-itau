@@ -19,7 +19,7 @@ export class BusinessService {
       .pipe(catchError(this.handleError));
   }
 
-  getBusiness(id: number): Observable<IBusiness> {
+  getBusiness(id: string): Observable<IBusiness> {
     return this.http
       .get<IBusiness>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));
@@ -31,13 +31,13 @@ export class BusinessService {
       .pipe(catchError(this.handleError));
   }
 
-  updateBusiness(id: number, business: IBusiness): Observable<IBusiness> {
+  updateBusiness(id: string, business: IBusiness): Observable<IBusiness> {
     return this.http
       .put<IBusiness>(`${this.apiUrl}/${id}`, business)
       .pipe(catchError(this.handleError));
   }
 
-  deleteBusiness(id: number): Observable<void> {
+  deleteBusiness(id: string): Observable<void> {
     return this.http
       .delete<void>(`${this.apiUrl}/${id}`)
       .pipe(catchError(this.handleError));

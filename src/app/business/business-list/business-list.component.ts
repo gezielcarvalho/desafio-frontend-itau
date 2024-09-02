@@ -100,6 +100,11 @@ export class BusinessListComponent implements AfterViewInit, OnInit {
     this.router.navigate(['/business-detail', element.id]);
   }
 
+  addBusiness() {
+    console.log('Add business');
+    this.router.navigate(['/business-detail/']);
+  }
+
   onRemoveClick(element: IBusiness) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',

@@ -5,4 +5,5 @@ import { BusinessDetailComponent } from './business/business-detail/business-det
 export const routes: Routes = [
   { path: '', component: BusinessListComponent },
   { path: 'business-detail/:id', component: BusinessDetailComponent },
+  { path: 'business-detail', component: BusinessDetailComponent },
 ];

@@ -4,6 +4,9 @@
     confira abaixo alguns dos principais polos do itau
   </p>
   <div class="mat-elevation-z8">
+    <button class="create-button" (click)="addBusiness()" mat-flat-button>
+      Create Business
+    </button>
     <table mat-table [dataSource]="dataSource" matSort class="custom-table">
       <!-- Name Column -->
       <ng-container matColumnDef="name">
